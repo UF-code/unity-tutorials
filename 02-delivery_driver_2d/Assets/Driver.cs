@@ -5,8 +5,10 @@ using UnityEngine;
 public class Driver : MonoBehaviour
 {
     // Variables
-    [SerializeField] float steerSpeed = 160;
-    [SerializeField] float moveSpeed = 4;
+    [SerializeField] float steerSpeed = 1f;
+    [SerializeField] float moveSpeed = 20f;
+    [SerializeField] float slowSpeed = 15f;
+    [SerializeField] float boostSpeed = 30f;
 
 
 
@@ -27,5 +29,19 @@ public class Driver : MonoBehaviour
 
         transform.Translate(0, moveAmount, 0);
 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Boost")
+        {
+            moveSpeed = boostSpeed;
+        }
+
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        moveSpeed = slowSpeed;
     }
 }
